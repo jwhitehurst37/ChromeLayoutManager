@@ -2,7 +2,7 @@
  "update_url": "https://clients2.google.com/service/update2/crx",
   "manifest_version": 2,
   "name": "LexisNexis Layout Manager",
-  "version": "1.1",
+  "version": "1.2",
   "author": "Paulo P.",
   "icons": {
     "16": "img/icon_016.png",

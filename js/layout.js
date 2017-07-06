@@ -3,10 +3,10 @@ var savetimer;
 function saveLayout() {
     var name = document.getElementById("layout_name").value;
     if (name.length > 0) {
-        name = name.replace(/ /g ,"_");
+        //name = name.replace(/ /g ,"_");
         clearTimeout(savetimer);
         chrome.extension.sendRequest({saveState: true, layout_name : name}, function(res) {
-            document.getElementById("layouts").innerHTML = "<h3>Layout List</h3>";
+            document.getElementById("layouts").innerHTML = "<h3></h3>";
             init();
         });
         document.getElementById('saveButton').style.color = '#0000FF';
@@ -34,7 +34,7 @@ function clearLayout(txt) {
     clearTimeout(cleartimer);
     //document.getElementById('clearButton').style.color='#0000FF';
     chrome.extension.sendRequest({clearState:true, layout_name: txt}, function(){
-        document.getElementById("layouts").innerHTML = "<h3>Layout List</h3>";
+        document.getElementById("layouts").innerHTML = "<h3></h3>";
         init();
     });
     cleartimer = setTimeout(function() {
@@ -43,19 +43,31 @@ function clearLayout(txt) {
 }
 
 function renderList(text) {
+    var currentdate = new Date();
+    var datetime = "" + currentdate.getDate() + "/"
+        + (currentdate.getMonth()+1)  + "/"
+        + currentdate.getFullYear() + " @ "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":"
+        + currentdate.getSeconds();
+
     var linkList = document.getElementById("layouts");
     var divTag = document.createElement("div");
     divTag.setAttribute("class","layout");
     var aTag = document.createElement("a");
     aTag.setAttribute("href","#"+text);
     aTag.innerHTML = text;
+
     var aImg = document.createElement("img");
     aImg.setAttribute("src","img/close.png");
     aImg.setAttribute("title", text);
-    aImg.setAttribute("style","width:14px;padding:0px;float:right;");
+
+    var sTag = document.createElement("span");
+    sTag.innerHTML = datetime;
 
     divTag.appendChild(aTag);
     divTag.appendChild(aImg);
+    divTag.appendChild(sTag);
     linkList.appendChild(divTag);
 }
 
