@@ -23,4 +23,4 @@ Dependencies:
 
 To build the solution use `gulp`
 
-To package use `gulp package` to create the `chrome-layout-manager-extension.zip`
+To package use `gulp` and `gulp package` to create the `chrome-layout-manager-extension.zip`
